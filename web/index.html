@@ -1,0 +1,47 @@
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <h2 align="center">User registration form</h2>
+        <form action="user_registration" method="POST">
+            
+            <table border="0" align="center">
+                <tbody>
+                    <tr>
+                        <td>Username:</td>
+                        <td><input type="text" name="username" value="" placeholder="Enter your name"/></td>
+                    </tr>
+                    <tr>
+                        <td>Password:</td>
+                        <td><input type="password" name="password" placeholder="Enter password"/></td>
+                    </tr>
+                    <tr>
+                        <td>Age:</td>
+                        <td><input type="number" name="age" placeholder="Enter age"/></td>
+                    </tr>
+                    <tr>
+                        <td>Email</td>
+                        <td><input type="email" name="email" placeholder="Enter email" /></td>
+                    </tr>
+                    <tr>
+                        <td>Gender:</td>
+                        <td><input type="radio" name="gender" id="male" value="male"/>
+                            <label for="male">Male</label>
+                            <input type="radio" name="gender" id="female" value="female"/>
+                            <label for="female">Female</label>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><input type="submit" value="SUBMIT"></td>
+                        <td align="center"><input type="reset" value="RESET"></td>
+                    </tr>
+                    
+                </tbody>
+            </table>
+
+        </form>
+    </body>
+</html>
