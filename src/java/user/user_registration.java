@@ -6,6 +6,7 @@ import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -55,12 +56,17 @@ public class user_registration extends HttpServlet {
             ps.setInt(3, age);
             ps.setString(4,email);
             ps.setString(5, gender);
-            ps.executeUpdate();
+            int rowaffected= ps.executeUpdate();
             
-            RequestDispatcher rd=request.getRequestDispatcher("newjsp.jsp");
-            rd.forward(request, response);
+            if(rowaffected > 0) {
+                out.println("<script>alert('You are logged In.');</script>");
+                out.println("<script>window.location.href='login.jsp';</script>");
+            } else {
+                out.println("Failed to add the user to the database");
+                response.sendError(HttpServletResponse.SC_BAD_REQUEST,"failed to register user");
+            }
             
-        }catch(Exception e){
+        }catch(IOException | ClassNotFoundException | SQLException e){
             System.out.println("Error ::"+e.getMessage());
             response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR,"Unexpected error occoured");
         }  

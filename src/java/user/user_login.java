@@ -9,6 +9,7 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 
 public class user_login extends HttpServlet {
@@ -51,6 +52,10 @@ public class user_login extends HttpServlet {
                 String passwords=rs.getString("password");
                 boolean cheakPass=BCrypt.verifyer().verify(pass.toCharArray(), passwords).verified;
                 if(cheakPass){
+                    
+                    HttpSession session=request.getSession();
+                    session.setAttribute("username", name);
+                    
                      Cookie usercookie=new Cookie("username",name);
                      usercookie.setMaxAge(3000);
                      
