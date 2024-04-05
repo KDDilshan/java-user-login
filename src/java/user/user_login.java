@@ -70,7 +70,7 @@ public class user_login extends HttpServlet {
                 out.println("<h1>No user found with the given username.</h1>");
             }
             
-        }catch(Exception e){
+        }catch(ClassNotFoundException | SQLException e){
             System.out.println("Error is :: "+e.getMessage());
             response.sendError(HttpServletResponse.SC_BAD_REQUEST,"Invaild creadentials");
         }

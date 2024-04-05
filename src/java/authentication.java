@@ -8,6 +8,8 @@ import javax.servlet.FilterConfig;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 public class authentication implements Filter {
     
@@ -21,7 +23,19 @@ public class authentication implements Filter {
     public void doFilter(ServletRequest request, ServletResponse response,
             FilterChain chain)
             throws IOException, ServletException {
-        
+         HttpServletRequest httpRequest = (HttpServletRequest) request;
+        HttpServletResponse httpResponse = (HttpServletResponse) response;
+
+        // Check if user is logged in (you need to implement this logic)
+        boolean isLoggedIn = checkIfUserIsLoggedIn(httpRequest);
+
+        if (isLoggedIn) {
+            // User is logged in, continue with the request
+            chain.doFilter(request, response);
+        } else {
+            // User is not logged in, redirect to login page or show an error message
+            httpResponse.sendRedirect("login.jsp");
+        }
         
     }
 
@@ -79,6 +93,11 @@ public class authentication implements Filter {
     
     public void log(String msg) {
         filterConfig.getServletContext().log(msg);        
+    }
+
+    private boolean checkIfUserIsLoggedIn(HttpServletRequest request) {
+               return request.getSession().getAttribute("user") != null;
+
     }
     
 }
